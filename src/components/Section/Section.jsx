@@ -15,7 +15,7 @@ class Section extends Component {
   }
   
 
-  updateFeedbackState= (el) => {
+    updateFeedbackState = (el) => {
     this.setState(prevState => ({ [el]: prevState[el] + 1 }))
   }
 
