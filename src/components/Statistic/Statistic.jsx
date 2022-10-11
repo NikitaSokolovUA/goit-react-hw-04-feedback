@@ -1,24 +1,24 @@
 import React from "react";
+import { ListItem, Text, StatisticText } from "./Statistic.styled";
 
  const Statistic = ({good, neutral, bad, total, positivePercentage}) => {
     return <>
-    <h2>Statistic</h2>
       <ul>
-        <li>
-          <p>Good: <span>{ good }</span></p>
-        </li>
-        <li>
-          <p>Neutral: <span>{ neutral}</span></p>
-        </li>
-        <li>
-          <p>Bad: <span>{ bad }</span></p>
-        </li>
-        <li>
-          <p>Total: <span>{total}</span></p>
-        </li>
-        <li>
-          <p>Positive feedback: <span>{positivePercentage} %</span></p>
-        </li>
+        <ListItem>
+          <Text>Good: <StatisticText>{ good }</StatisticText></Text>
+        </ListItem>
+        <ListItem>
+          <Text>Neutral: <StatisticText>{ neutral}</StatisticText></Text>
+        </ListItem>
+        <ListItem>
+          <Text>Bad: <StatisticText>{ bad }</StatisticText></Text>
+        </ListItem>
+        <ListItem>
+          <Text>Total: <StatisticText>{total}</StatisticText></Text>
+        </ListItem>
+        <ListItem>
+          <Text>Positive feedback: <StatisticText>{positivePercentage} %</StatisticText></Text>
+        </ListItem>
         </ul>
     </>
 }
