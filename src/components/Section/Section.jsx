@@ -3,6 +3,7 @@ import Statistic from "../Statistic";
 import FeedbackOptions from "../FeedbackOptions";
 import Notification from "../Notification";
 import { SectionBox, Title } from "./Section.styled";
+import PropTypes from 'prop-types';
 
 
 class Section extends Component {
@@ -61,3 +62,7 @@ class Section extends Component {
 }
 
 export default Section
+
+Section.propTypes = {
+    title: PropTypes.string.isRequired,
+}
