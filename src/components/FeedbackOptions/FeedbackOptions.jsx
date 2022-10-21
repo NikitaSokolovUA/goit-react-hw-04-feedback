@@ -1,4 +1,3 @@
-import React from 'react';
 import { ButtonList, Button } from './FeedbackOptions.styled';
 import PropTypes from 'prop-types';
 
