@@ -1,53 +1,46 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Section from './Section';
 import Statistic from './Statistic';
 import FeedbackOptions from './FeedbackOptions';
 import Notification from './Notification';
 
 export default function App() {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
-  const [posPercent, setPosPercent] = useState(0);
+  const [feedback, setFeedback] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  });
 
   function updateFeedbackState(el) {
-    switch (el) {
-      case 'good':
-        setGood(prev => prev + 1);
-        break;
-      case 'neutral':
-        setNeutral(prev => prev + 1);
-        break;
-      case 'bad':
-        setBad(prev => prev + 1);
-        break;
-      default:
-        return;
-    }
+    setFeedback(prevState => ({ ...prevState, [el]: prevState[el] + 1 }));
   }
 
-  useEffect(() => {
-    setTotalCount(good + neutral + bad);
-    setPosPercent(Math.round((good / totalCount) * 100));
-  }, [good, neutral, bad, totalCount]);
+  function getTotalCount() {
+    return Object.values(feedback).reduce((prev, number) => {
+      return prev + number;
+    }, 0);
+  }
+
+  function getPositiveFedbackPercent() {
+    return Math.round((feedback.good / getTotalCount()) * 100);
+  }
 
   return (
     <>
       <Section title={'Please leave feedback'}>
         <FeedbackOptions
-          options={['good', 'neutral', 'bad']}
+          options={Object.keys(feedback)}
           onLeaveFeedback={updateFeedbackState}
         />
       </Section>
       <Section title={'Statistic'}>
-        {totalCount ? (
+        {getTotalCount() ? (
           <Statistic
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={totalCount}
-            positivePercentage={posPercent}
+            good={feedback.good}
+            neutral={feedback.neutral}
+            bad={feedback.bad}
+            total={getTotalCount()}
+            positivePercentage={getPositiveFedbackPercent()}
           />
         ) : (
           <Notification message={'There is no feedback'} />
